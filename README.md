@@ -1,6 +1,6 @@
-# Simple Weather App
+# Weather App
 
-This is a weather app that allows users to search for weather information by city. The app fetches real-time data from the OpenWeatherMap API.
+A simple feature which generates weather information by city.
 
 ## How to Run
 
