@@ -5,50 +5,85 @@
 }
 
 body {
-    font-family: Arial; /* Sets the font-family within the body to Arial */
-    text-align: center; /* Centers the text within the body horizontally */
+    font-family: sans-serif; /* Sets the font-family within the body to Arial */
+    font-size: 12px;
     height: 100vh;      /* Sets the height of the body to 100% of the viewport height */
     overflow: hidden;   /* Hides any content that exceeds the body's dimensions */
-}
-
-.sky::before {
-    content: '';        /* Creates an empty content box for the pseudo-element */
-    position: absolute; /* Positions the pseudo-element absolutely within the .sky element */
-    top: 0;             /* Aligns the pseudo-element to the top of the .sky element */
-    left: 0;            /* Aligns the pseudo-element to the left of the .sky element */
-    width: 100%;        /* Sets the width of the pseudo-element to cover the entire width of the .sky element */
-    height: 100%;       /* Sets the height of the pseudo-element to cover the entire height of the .sky element */
-    background: rgba(255, 255, 255, 0.1); /* Applies a light white overlay with 10% opacity */
-    background-image: linear-gradient(
-        rgba(255, 255, 255, 0.1) 1px, transparent 1px
-    ),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;             /* Sets the size of the grid squares to 50 pixels */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    position: relative;      /* Position relative to allow absolute children */
 }
 
 .sky {
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
+    display: grid;                         /* Use grid layout */
+    grid-template-columns: repeat(auto-fill, 10px); /* Fill with 10px columns */
+    grid-template-rows: repeat(auto-fill, 10px);    /* Fill with 10px rows */
+    width: 100vw;                          /* Full width */
+    height: 100vh;                         /* Full height */
+    overflow: hidden;                      /* Prevent overflow */
+    background-color: transparent;         /* Transparent to show grid */
 }
 
-.clouds {
-    background: url('https://static.vecteezy.com/system/resources/thumbnails/036/395/794/small/blue-sky-cloud-bubble-pixel-design-for-decoration-wheather-forcast-pixel-design-png.png'); /* Sets the background image to a cloud graphic */
-    position: absolute;  /* Positions the clouds absolutely within the nearest positioned ancestor */
-    top: 20%;            /* Places the clouds 20% down from the top of the parent element */
-    width: 200%;         /* Sets the width of the clouds to 200% of the parent element's width */
-    height: 200px;       /* Sets a fixed height of 200 pixels for the clouds */
-    background-repeat: repeat-x;  /* Repeats the background image horizontally */
-    background-size: contain;      /* Scales the background image to fit within the dimensions of the element */
-    animation: moveClouds 30s linear infinite; /* Applies an animation that moves the clouds horizontally over 30 seconds */
+.container {
+    font-family: sans-serif;
+    max-width: 400px;          /* Set a max-width for the container */
+    padding: 20px;
+    border: 10px solid #ffffff;    /* Add a border around the container */
+    border-radius: 10px;       /* Rounded corners */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+    display: flex;
+    flex-direction: column;     /* Stack elements vertically */
+    align-items: center;        /* Center elements horizontally */
+    position: absolute;         /* Position absolutely to center it */
+    top: 50%;                  /* Center vertically */
+    left: 50%;                 /* Center horizontally */
+    transform: translate(-50%, -50%); /* Offset the position to truly center */
 }
 
-@keyframes moveClouds {
-    0% {
-        transform: translateX(0);       /* At the start of the animation, the clouds are in their original position */
-    }
-    100% {
-        transform: translateX(-50%);    /* At the end of the animation, the clouds are moved left by 50% of their width */
-    }
+label {
+    font-size: 10px;    /* Set font size to 10 pixels */
+    text-align: center; /* Center align the text */
+    display: block;     /* Make it a block element for centering */
+    margin-bottom: 5px; /* Add some spacing below the label */
 }
 
+.grid-block {
+    width: 10px; /* Width of each block */
+    height: 10px; /* Height of each block */
+}
+
+.cloud-color {
+    background-color: white; /* Cloud color */
+}
+
+.sky-color {
+    background-color: lightblue; /* Sky color */
+}
+
+input[type="text"] {
+    margin: 10px;
+    width: 100%;              /* Make input take full width of the container */
+    padding: 50px;           /* Add padding inside the input field */
+    font-size: 12px;         /* Increase font size for better readability */
+    border: 2px solid #ccc;  /* Add a solid border */
+    border-radius: 5px;      /* Rounded corners */
+    margin-bottom: 10px;     /* Add space below the input */
+    text-align: center;
+}
+
+button {
+    margin: 10px;                /* Add spacing around the button */
+    padding: 10px;               /* Add padding inside the button */
+    font-size: 16px;             /* Set font size for better readability */
+    border: 2px solid lightblue; /* Border color */
+    border-radius: 5px;          /* Rounded corners */
+    cursor: pointer;              /* Change cursor to pointer on hover */
+    background-color: lightblue;  /* Set button background color */
+    color: white;                /* Set text color */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+button:hover {
+    background-color: deepskyblue; /* Change background color on hover */
+}
