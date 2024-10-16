@@ -8,6 +8,9 @@ document.getElementById('getWeather').addEventListener('click', function() {
         alert('Please enter a city');
         return;
     }
+
+    // Show loading message
+    document.getElementById('weatherDetails').innerHTML = `<p>Loading...</p>`;
     
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
@@ -39,27 +42,30 @@ document.getElementById('getWeather').addEventListener('click', function() {
 });
 
 // Function to create a painted sky with clouds
-function createSkyWithClouds(totalBlocks) {
+function createSkyWithClouds() {
     const skyElement = document.querySelector('.sky');
+    
+    // Create enough blocks to fill the screen
+    const totalBlocks = Math.ceil(window.innerWidth * window.innerHeight / (10 * 10)); // Number of blocks based on 10x10 size
+
     for (let i = 0; i < totalBlocks; i++) {
         const div = document.createElement('div');
         div.className = 'grid-block'; // Ensure this class has styles to be visible
         
-        // Randomly decide if this block should be sky or cloud
-        if (Math.random() < 0.15) { // 15% chance to become a cloud
-            div.classList.add('cloud-color'); // You can add styles for cloud color
-        } else {
-            div.classList.add('sky-color'); // You can add styles for sky color
-        }
-    
-        // Position blocks randomly within the sky
-        div.style.top = `${Math.random() * 100}vh`; // Random top position
-        div.style.left = `${Math.random() * 100}vw`; // Random left position
+        // Assign a random initial color (85% light blue, 15% white)
+        div.style.backgroundColor = Math.random() < 0.15 ? 'white' : 'lightblue';
     
         skyElement.appendChild(div);
     }
 }
 
-// Automatically generate enough blocks to fill the screen
-const totalBlocks = Math.ceil(window.innerWidth * window.innerHeight / 100); // 100 pixels per block
-createSkyWithClouds(totalBlocks);
+// Change the colors of the grid blocks every 10 seconds
+setInterval(() => {
+    const blocks = document.querySelectorAll('.grid-block');
+    blocks.forEach(block => {
+        block.style.backgroundColor = Math.random() < 0.15 ? 'white' : 'lightblue'; // 15% chance for white, 85% for light blue
+    });
+}, 10000); // Change every 10 seconds
+
+// Initialize the sky with clouds
+createSkyWithClouds();
